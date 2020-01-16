@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>de.fenvariel</groupId>
+    <artifactId>certificate-maven-plugin-demo</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+    <build>
+        <!-- Alle Plugin-Konfigurationen innerhalb von pluginManagement werden
+        von POMs, die von dieser Datei abhängen auch so verwendet (können allerdings
+        überschrieben werden). -->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.2</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                        <!-- Aufrufe von veralteten APIs anzeigen (default: false) -->
+                        <showDeprecation>true</showDeprecation>
+                        <!-- Compilerwarnungen anzeigen (default: false) -->
+                        <showWarnings>true</showWarnings>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <!-- Diese Plugin-Konfigurationen werden nicht in andere POMs übernommen
+        und sind sozusagen 'private'. Um Plugins an eine phase zu binden muss dies
+        hier definiert werden. -->
+        <plugins>
+            <plugin>
+                <groupId>de.fenvariel</groupId>
+                <artifactId>certificate-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generateServer</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/certs</outputDirectory>
+                            <alternativeName>true</alternativeName>
+                            <ca_alias>testca</ca_alias>
+                            <ca_keypass>changeit</ca_keypass>
+                            <ca_keystore>${basedir}/src/main/resources/test-keystore.jks</ca_keystore>
+                            <ca_storepass>changeit</ca_storepass>
+                            <ca_storetype>JKS</ca_storetype>
+                            <common_name>alex.fenvariel.de</common_name>
+                            <country_code>DE</country_code>
+                            <keystore_name>server</keystore_name>
+                            <locality>Körprich</locality>
+                            <mail_address>fenvariel@googlemail.com</mail_address>
+                            <organisation>none</organisation>
+                            <organisational_unit>test</organisational_unit>
+                            <state>Saarland</state>
+                            <uid>0815</uid>
+                            <validity_duration>10</validity_duration>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <finalName>certificate-maven-plugin-test</finalName>
+    </build>
+</project>

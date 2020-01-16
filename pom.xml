@@ -1,0 +1,73 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>de.fenvariel</groupId>
+    <artifactId>certificate-maven-pom</artifactId>
+    <packaging>pom</packaging>
+
+
+    <name>${project.groupId}:${project.artifactId}</name>
+    <version>1.0</version>
+    <description />
+    <url>https://github.com/AlexSchuetz/certificate-maven-plugin</url>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <gitUrl>AlexSchuetz/certificate-maven-plugin</gitUrl>
+
+        <!-- Since maven 3.2.x maven.build.timestamp is utc-timestamp -->
+        <!-- ISO8601-UTC-Date -->
+        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss'Z'</maven.build.timestamp.format>
+        <!-- START workaroud to access maven.build.timestamp in install goal -->
+        <!-- see https://issues.apache.org/jira/browse/MRESOURCES-99 -->
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <!-- END workaround -->
+
+    </properties>
+
+	
+    <issueManagement>
+        <url>https://github.com/AlexSchuetz/certificate-maven-plugin/issues</url>
+        <system>GitHub</system>
+    </issueManagement>
+
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Alexander Schütz</name>
+            <url>https://github.com/AlexSchuetz</url>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/${gitUrl}.git</connection>
+        <developerConnection>scm:git:git@github.com:${gitUrl}.git</developerConnection>
+        <url>https://github.com/${gitUrl}</url>
+    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+        <site>
+            <id>gh-pages</id>
+            <name>GitHub Pages</name>
+            <url>git:ssh://git@github.com/${gitUrl}.git?gh-pages#</url>
+        </site>
+    </distributionManagement>
+
+	<modules>
+        <module>certificate-maven-plugin</module>
+        <module>certificate-maven-plugin-demo</module>
+    </modules>
+</project>
