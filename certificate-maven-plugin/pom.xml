@@ -3,7 +3,7 @@
     <groupId>de.fenvariel</groupId>
     <artifactId>certificate-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
-    <version>1.0</version>
+    <version>1.1</version>
     <name>Maven Certificate Plugin</name>
     <description>A maven plugin to generate server-certificates using a CA for testing on the fly.</description>
     <url>https://alexschuetz.github.io/certificate-maven-plugin/</url>

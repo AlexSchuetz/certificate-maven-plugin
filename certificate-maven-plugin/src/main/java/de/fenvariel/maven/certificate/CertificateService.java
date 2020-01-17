@@ -58,7 +58,7 @@ public class CertificateService {
     public void generateServerCertificate(CertificateParameters parameters, KeyStoreParameters keyStoreParameters) throws NoSuchAlgorithmException, NoSuchProviderException, GeneralSecurityException, CertIOException, OperatorCreationException, IOException, Exception {
         CertificateFactory factory = new CertificateFactory(caPrivateKey, caChain);
 
-        KeyPair keyPair = CryptoUtil.generateKeyPair(parameters.getKeySize());
+        KeyPair keyPair = CryptoUtil.generateKeyPair(parameters.getKeySize(), parameters.getKeyAlgorithm());
         X500Principal principal = new X500PrincipalBuilder()
                 .setCommonName(parameters.getCommonName())
                 .setCountry(parameters.getCountryCode())

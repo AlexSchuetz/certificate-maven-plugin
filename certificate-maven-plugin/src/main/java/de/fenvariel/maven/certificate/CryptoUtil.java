@@ -42,6 +42,7 @@ import org.bouncycastle.openssl.PEMParser;
 public final class CryptoUtil {
 
     private static final int DEFAULT_KEYSIZE = 2048;
+    private static final String DEFAULT_ALGORITHM = "RSA";
 
     static {
         if (!isBouncyCastleInstalled()) {
@@ -151,6 +152,7 @@ public final class CryptoUtil {
         return generateKeyPair(DEFAULT_KEYSIZE);
     }
 
+    
     /**
      * generates a RSA-key pair with the given key-size
      *
@@ -163,8 +165,24 @@ public final class CryptoUtil {
      *                                  RSA
      */
     public static KeyPair generateKeyPair(int keySize) throws NoSuchAlgorithmException {
+        return generateKeyPair(keySize, DEFAULT_ALGORITHM);
+    }
+    
+    /**
+     * generates a key pair with the given key-size
+     *
+     * @param keySize the keysize (i.e. 1024)
+     * @param algorithm the asymmetric algorithm used for the keypair
+     *
+     * @return KeyPair the keypair
+     *
+     * @throws NoSuchAlgorithmException if no provider supports a
+     *                                  KeyPairGeneratorSpi implementation for
+     *                                  RSA
+     */
+    public static KeyPair generateKeyPair(int keySize, String algorithm) throws NoSuchAlgorithmException {
 
-        KeyPairGenerator pairgen = KeyPairGenerator.getInstance("RSA");
+        KeyPairGenerator pairgen = KeyPairGenerator.getInstance(algorithm);
         pairgen.initialize(keySize);
 
         return pairgen.generateKeyPair();

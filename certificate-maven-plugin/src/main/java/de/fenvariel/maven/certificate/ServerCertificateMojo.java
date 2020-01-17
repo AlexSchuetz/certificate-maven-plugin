@@ -120,6 +120,18 @@ public class ServerCertificateMojo extends AbstractCertificateMojo {
     private String mail_address;
     
     /**
+     * (optional) The algorithm used for the key.
+     */
+    @Parameter(defaultValue = "RSA")
+    private String key_algorithm;
+    
+    /**
+     * (optional) The key size for the private key.
+     */
+    @Parameter(defaultValue = "512")
+    private int key_size;
+    
+    /**
      * (optional) The subject uid for the certificate.
      */
     @Parameter(defaultValue = "")
@@ -173,7 +185,7 @@ public class ServerCertificateMojo extends AbstractCertificateMojo {
             
             CertificateService certificateService = new CertificateService(ca_keystore, ca_storetype, ca_storepass.toCharArray(), ca_alias, ca_keypass.toCharArray());
             KeyStoreParameters keyStoreParameters = new KeyStoreParameters(keystore_name, cert_alias, cert_storepass, cert_keypass, outputDirectory);
-            CertificateParameters certificateParameters = new CertificateParameters(1024, common_name, country_code, locality, organisation, organisational_unit, state, mail_address, uid, (alternative_name ? common_name : null), validity_duration);
+            CertificateParameters certificateParameters = new CertificateParameters(key_size, key_algorithm, common_name, country_code, locality, organisation, organisational_unit, state, mail_address, uid, (alternative_name ? common_name : null), validity_duration);
             certificateService.generateServerCertificate(certificateParameters, keyStoreParameters);
         } catch (Exception ex) {
             Logger.getLogger(ServerCertificateMojo.class.getName()).log(Level.SEVERE, null, ex);

@@ -22,6 +22,8 @@ public class CertificateParameters {
 
     private final int keySize;
 
+    private final String keyAlgorithm;
+    
     private final String commonName;
     
     private final String countryCode;
@@ -42,8 +44,9 @@ public class CertificateParameters {
     
     private final String alternativeName;
 
-    public CertificateParameters(int keySize, String commonName, String countryCode, String locality, String organisation, String organisationalUnit, String state, String mailAddress, String uid, String alternativeName, int validityDuration) {
+    public CertificateParameters(int keySize, String keyAlgorithm, String commonName, String countryCode, String locality, String organisation, String organisationalUnit, String state, String mailAddress, String uid, String alternativeName, int validityDuration) {
         this.validityDuration = validityDuration;
+        this.keyAlgorithm = keyAlgorithm;
         this.keySize = keySize;
         this.commonName = commonName;
         this.countryCode = countryCode;
@@ -73,6 +76,11 @@ public class CertificateParameters {
         return countryCode;
     }
 
+    public String getKeyAlgorithm() {
+        return keyAlgorithm;
+    }
+
+    
     public String getLocality() {
         return locality;
     }
